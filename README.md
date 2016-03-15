@@ -13,7 +13,7 @@ The extra rules are:
 
 The wiki contains a quick guide how to install the rules and a short description of the included rules.
 
-If you do not want to compile the dll containing the rules yourself, have a look at the releases. It has a zip containing the compiled dll.
+If you do not want to compile the dll containing the rules yourself, have a look at the releases. It has a zip (called XtendDacRules.zip) containing the compiled dll.
 
 IMPORTANT: If you use the zip with the compiled dll, check the properties of the dll before starting Visual Studio. The dll might be blocked and in that case needs to be unblocked before you can use it.
 
