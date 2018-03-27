@@ -41,7 +41,18 @@ namespace Xtend.Dac.Rules
 
         public override void ExplicitVisit(ExecutableProcedureReference node)
         {
-            string schema = node.ProcedureReference.ProcedureReference.Name.SchemaIdentifier.Value;
+            SchemaObjectName schemaObject = node.ProcedureReference.ProcedureReference.Name;
+            Identifier id = node.ProcedureReference.ProcedureReference.Name.SchemaIdentifier;
+            string schema;
+            if (schemaObject.SchemaIdentifier != null)
+            {
+                schema = schemaObject.SchemaIdentifier.Value;
+            }
+            else
+            {
+                // Assuming schema is dbo
+                schema = "dbo";
+            }
             string procedure = node.ProcedureReference.ProcedureReference.Name.BaseIdentifier.Value;
             TSqlObject procObject = model.GetObject(Procedure.TypeClass, new ObjectIdentifier(schema, procedure), DacQueryScopes.UserDefined);
             if (procObject != null)
