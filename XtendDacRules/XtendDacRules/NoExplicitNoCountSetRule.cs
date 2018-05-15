@@ -74,7 +74,7 @@ namespace Xtend.Dac.Rules
             // Get schema of the procedure.
             TSqlObject schema = modelElement.GetReferenced(Procedure.Schema).SingleOrDefault();
 
-            if (schema != null)
+            if (schema != null && fragment.FragmentLength > 0)
             {
                 // Use a visitor to see if the procedure has a nocount set
                 SetNoCountVisitor visitor = new SetNoCountVisitor();
