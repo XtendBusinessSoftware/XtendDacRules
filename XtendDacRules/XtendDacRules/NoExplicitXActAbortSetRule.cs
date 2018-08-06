@@ -39,7 +39,7 @@ namespace Xtend.Dac.Rules
     {
         /// <summary>
         /// This rule= will be grouped by "Xtend.Dac.Rules.Performance", with the rule
-        /// shown as "XR0004: All procedures must set nocount"
+        /// shown as "XR0009: All procedures must set xact_abort"
         /// </summary>
         public const string RuleId = "Xtend.Rules.Data.XR0009";
 

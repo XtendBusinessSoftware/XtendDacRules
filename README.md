@@ -10,6 +10,7 @@ The extra rules are:
 * XR0006: No unused parameter may exist
 * XR0007: All mandatory parameters must be filled in
 * XR0008: Avoid setting concat_null_yields_null option to off
+* XR0009: All procedures must set xact_abort
 
 The wiki contains a quick guide how to install the rules and a short description of the included rules.
 
