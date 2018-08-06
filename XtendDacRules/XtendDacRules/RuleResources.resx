@@ -150,6 +150,12 @@
   <data name="NoExplicitNoCountSet_RuleName" xml:space="preserve">
     <value>All procedures must set nocount</value>
   </data>
+  <data name="NoExplicitXActAbortSet_ProblemDescription" xml:space="preserve">
+    <value>Procedure {0} does not set xact_abort</value>
+  </data>
+  <data name="NoExplicitXActAbortSet_RuleName" xml:space="preserve">
+    <value>All procedures must set xact_abort</value>
+  </data>
   <data name="TableWithoutDescription_ProblemDescription" xml:space="preserve">
     <value>Table {0} has no description</value>
   </data>

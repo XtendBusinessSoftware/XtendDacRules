@@ -52,19 +52,28 @@ namespace Xtend.Dac.Rules
         /// </summary>
         public const string TableWithoutDescription_ProblemDescription = "TableWithoutDescription_ProblemDescription";
 
-        /// <summary>
-        /// Lookup name inside the resources file for the rule name
-        /// </summary>
-        public const string NoExplicitNoCountSet_RuleName = "NoExplicitNoCountSet_RuleName";
-        /// <summary>
-        /// Lookup ID inside the resources file for the description
-        /// </summary>
-        public const string NoExplicitNoCountSet_ProblemDescription = "NoExplicitNoCountSet_ProblemDescription";
+    /// <summary>
+    /// Lookup name inside the resources file for the rule name
+    /// </summary>
+    public const string NoExplicitNoCountSet_RuleName = "NoExplicitNoCountSet_RuleName";
+    /// <summary>
+    /// Lookup ID inside the resources file for the description
+    /// </summary>
+    public const string NoExplicitNoCountSet_ProblemDescription = "NoExplicitNoCountSet_ProblemDescription";
+    /// <summary>
+    /// Lookup name inside the resources file for the rule name
+    /// </summary>
+    public const string NoExplicitXActAbortSet_RuleName = "NoExplicitXActAbortSet_RuleName";
+    /// <summary>
+    /// Lookup ID inside the resources file for the description
+    /// </summary>
+    public const string NoExplicitXActAbortSet_ProblemDescription = "NoExplicitXActAbortSet_ProblemDescription";
 
-        /// <summary>
-        /// Lookup name inside the resources file for the rule name
-        /// </summary>
-        public const string UnusedVariable_RuleName = "UnusedVariable_RuleName";
+
+    /// <summary>
+    /// Lookup name inside the resources file for the rule name
+    /// </summary>
+    public const string UnusedVariable_RuleName = "UnusedVariable_RuleName";
         /// <summary>
         /// Lookup ID inside the resources file for the description
         /// </summary>

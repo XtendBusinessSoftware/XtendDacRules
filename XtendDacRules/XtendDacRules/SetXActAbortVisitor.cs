@@ -21,19 +21,19 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace Xtend.Dac.Rules
 {
-    internal class SetNoCountVisitor : TSqlConcreteFragmentVisitor
+    internal class SetXActAbortVisitor : TSqlConcreteFragmentVisitor
     {
-        public bool SetNoCountFound { get; private set; }
+        public bool SetXActAbortFound { get; private set; }
 
-        public SetNoCountVisitor()
+        public SetXActAbortVisitor()
         {
-            SetNoCountFound = false;
+          SetXActAbortFound = false;
         }
 
         public override void ExplicitVisit(PredicateSetStatement node)
         {
-            if ((node.Options & SetOptions.NoCount) == SetOptions.NoCount)
-                SetNoCountFound = true;
+            if ((node.Options & SetOptions.XactAbort) == SetOptions.XactAbort)
+              SetXActAbortFound = true;
         }
     }
 }
