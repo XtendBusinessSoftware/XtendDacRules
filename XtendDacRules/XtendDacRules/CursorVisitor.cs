@@ -29,8 +29,8 @@ namespace Xtend.Dac.Rules
         public List<DeclareCursorStatement> DeclareCursorStatementsMissingDeallocate { get; private set; }
         public List<DeclareCursorStatement> DeclareCursorStatementsMissingOpen { get; private set; }
 
-        private bool checkMissing;
-        private bool checkFetch;
+        private readonly bool checkMissing;
+        private readonly bool checkFetch;
         private Dictionary<string, DeclareCursorStatement> declareCursorStatements;
 
         private T GetCursorStatement<T>(Dictionary<string, T> dict, string cursorkey) where T : TSqlStatement
@@ -55,8 +55,6 @@ namespace Xtend.Dac.Rules
                 DeclareCursorStatementsMissingOpen = new List<DeclareCursorStatement>();
             }
         }
-
-        public List<string> exceptions = new List<string>();
 
         public override void Visit(TSqlFragment node)
         {

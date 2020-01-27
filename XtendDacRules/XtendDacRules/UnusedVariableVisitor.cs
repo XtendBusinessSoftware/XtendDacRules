@@ -26,7 +26,7 @@ namespace Xtend.Dac.Rules
         public Dictionary<string, DeclareVariableElement> DeclareVariableElements{ get; private set; }
 
         private int index;
-        private bool checkParameters;
+        private readonly bool checkParameters;
 
         public UnusedVariableVisitor(bool checkParameters = false)
         {

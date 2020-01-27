@@ -1,0 +1,5 @@
+XtendDacRules/XtendDacRules/bin/
+XtendDacRules/XtendDacRules/obj/
+.vs/
+*.suo
+*.dll
