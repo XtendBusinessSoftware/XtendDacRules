@@ -76,35 +76,21 @@ namespace Xtend.Dac.Rules
 
             if (schema != null)
             {
-                try
+                // Use a visitor to see if the procedure has unused variables
+                MandatoryParameterVisitor visitor = new MandatoryParameterVisitor(ruleExecutionContext.SchemaModel);
+                fragment.Accept(visitor);
+                foreach (ExecutableProcedureReference element in visitor.ProcedureCalls)
                 {
-                    // Use a visitor to see if the procedure has unused variables
-                    MandatoryParameterVisitor visitor = new MandatoryParameterVisitor(ruleExecutionContext.SchemaModel);
-                    fragment.Accept(visitor);
-                    foreach (ExecutableProcedureReference element in visitor.ProcedureCalls)
-                    {
-                        SqlRuleProblem problem = new SqlRuleProblem(
-                                                    String.Format(
-                                                        CultureInfo.CurrentCulture,
-                                                        ruleDescriptor.DisplayDescription,
-                                                        element.ProcedureReference.ProcedureReference.Name.SchemaIdentifier.Value,
-                                                        element.ProcedureReference.ProcedureReference.Name.BaseIdentifier.Value,
-                                                        visitor.MissingParameters[element]),
-                                                    modelElement,
-                                                    element);
-                        problems.Add(problem);
-                    }
-                    foreach (var ex in visitor.exceptions)
-                    {
-                        SqlRuleProblem problem = new SqlRuleProblem(ex, modelElement);
-                        problems.Add(problem);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    SqlRuleProblem problem = new SqlRuleProblem(ex.ToString(), modelElement);
+                    SqlRuleProblem problem = new SqlRuleProblem(
+                                                String.Format(
+                                                    CultureInfo.CurrentCulture,
+                                                    ruleDescriptor.DisplayDescription,
+                                                    element.ProcedureReference.ProcedureReference.Name.SchemaIdentifier.Value,
+                                                    element.ProcedureReference.ProcedureReference.Name.BaseIdentifier.Value,
+                                                    visitor.MissingParameters[element]),
+                                                modelElement,
+                                                element);
                     problems.Add(problem);
-
                 }
             }
 

@@ -37,11 +37,11 @@ namespace Xtend.Dac.Rules
             ProcedureCalls = new List<ExecutableProcedureReference>();
             MissingParameters = new Dictionary<ExecutableProcedureReference, string>();
             this.model = model;
-            exceptions = new List<string>();
         }
 
         public override void ExplicitVisit(ExecutableProcedureReference node)
         {
+            // skip when unkown procedure. example: exec @pEventName @pParameter1, @pParameter2;
             if (node.ProcedureReference.ProcedureReference == null)
                 return;
 
@@ -116,7 +116,5 @@ namespace Xtend.Dac.Rules
                 }
             }
         }
-
-        public List<string> exceptions = null;
     }
 }
