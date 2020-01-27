@@ -133,7 +133,7 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing deallocate of cursor.
+        ///   Looks up a localized string similar to Missing or invalid deallocate or open of cursor.
         /// </summary>
         internal static string CursorMissingStatement_RuleName {
             get {

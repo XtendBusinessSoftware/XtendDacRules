@@ -143,7 +143,7 @@
     <comment>{0} = [Invalid or Missing] [open or deallocate]</comment>
   </data>
   <data name="CursorMissingStatement_RuleName" xml:space="preserve">
-    <value>Missing deallocate of cursor</value>
+    <value>Missing or invalid deallocate or open of cursor</value>
   </data>
   <data name="ForeignKeyWithoutIndex_ProblemDescription" xml:space="preserve">
     <value>Foreign key {0} was found without index on table {1}</value>
@@ -171,7 +171,6 @@
   </data>
   <data name="NullBooleanComparison_ProblemDescription" xml:space="preserve">
     <value>Invalid null comparison: {0} ({1})</value>
-    <comment> </comment>
   </data>
   <data name="NullBooleanComparison_RuleName" xml:space="preserve">
     <value>Invalid null comparison</value>

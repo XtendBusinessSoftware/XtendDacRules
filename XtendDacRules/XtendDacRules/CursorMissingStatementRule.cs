@@ -38,7 +38,7 @@ namespace Xtend.Dac.Rules
     {
         /// <summary>
         /// This rule= will be grouped by "Xtend.Dac.Rules.Naming", with the rule
-        /// shown as "XR0011: Missing deallocate of cursor"
+        /// shown as "XR0011: Missing or invalid deallocate or open of cursor"
         /// </summary>
         public const string RuleId = "Xtend.Rules.Data.XR0011";
 
