@@ -106,6 +106,42 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Column count of fetch ({1}) does not match cursor &apos;{0}&apos;..
+        /// </summary>
+        internal static string CursorColumnMismatch_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CursorColumnMismatch_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Column count mismatch of fetch and cursor.
+        /// </summary>
+        internal static string CursorColumnMismatch_RuleName {
+            get {
+                return ResourceManager.GetString("CursorColumnMismatch_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} of cursor &apos;{1}&apos; in procedure {2}..
+        /// </summary>
+        internal static string CursorMissingStatement_ProblemDescription {
+            get {
+                return ResourceManager.GetString("CursorMissingStatement_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing deallocate of cursor.
+        /// </summary>
+        internal static string CursorMissingStatement_RuleName {
+            get {
+                return ResourceManager.GetString("CursorMissingStatement_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Foreign key {0} was found without index on table {1}.
         /// </summary>
         internal static string ForeignKeyWithoutIndex_ProblemDescription {

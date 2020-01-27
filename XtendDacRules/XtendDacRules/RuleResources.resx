@@ -132,6 +132,19 @@
   <data name="ConcatNullYieldsNullEnabled_RuleName" xml:space="preserve">
     <value>Avoid setting concat_null_yields_null option to off</value>
   </data>
+  <data name="CursorColumnMismatch_ProblemDescription" xml:space="preserve">
+    <value>Column count of fetch ({1}) does not match cursor '{0}'.</value>
+  </data>
+  <data name="CursorColumnMismatch_RuleName" xml:space="preserve">
+    <value>Column count mismatch of fetch and cursor</value>
+  </data>
+  <data name="CursorMissingStatement_ProblemDescription" xml:space="preserve">
+    <value>{0} of cursor '{1}' in procedure {2}.</value>
+    <comment>{0} = [Invalid or Missing] [open or deallocate]</comment>
+  </data>
+  <data name="CursorMissingStatement_RuleName" xml:space="preserve">
+    <value>Missing deallocate of cursor</value>
+  </data>
   <data name="ForeignKeyWithoutIndex_ProblemDescription" xml:space="preserve">
     <value>Foreign key {0} was found without index on table {1}</value>
   </data>
