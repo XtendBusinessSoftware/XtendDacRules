@@ -71,6 +71,7 @@
     <Compile Include="ColumnWithoutDescriptionRule.cs" />
     <Compile Include="ConcatNullYieldsNullEnabledRule.cs" />
     <Compile Include="CursorMissingStatementRule.cs" />
+    <Compile Include="NullBooleanComparisonVisitor.cs" />
     <Compile Include="ForeignKeyWithoutIndexRule.cs" />
     <Compile Include="MandatoryParameterVisitor.cs" />
     <Compile Include="CursorColumnMismatchRule.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="MissingMandatoryParameterRule.cs" />
     <Compile Include="NoExplicitNoCountSetRule.cs" />
     <Compile Include="NoExplicitXActAbortSetRule.cs" />
+    <Compile Include="NullBooleanComparisonRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleConstants.cs" />
     <Compile Include="RuleResources.Designer.cs">

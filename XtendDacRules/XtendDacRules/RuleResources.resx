@@ -139,7 +139,7 @@
     <value>Column count mismatch of fetch and cursor</value>
   </data>
   <data name="CursorMissingStatement_ProblemDescription" xml:space="preserve">
-    <value>{0} of cursor '{1}' in procedure {2}.</value>
+    <value>{0} of cursor '{1}' in procedure {2}</value>
     <comment>{0} = [Invalid or Missing] [open or deallocate]</comment>
   </data>
   <data name="CursorMissingStatement_RuleName" xml:space="preserve">
@@ -168,6 +168,13 @@
   </data>
   <data name="NoExplicitXActAbortSet_RuleName" xml:space="preserve">
     <value>All procedures must set xact_abort</value>
+  </data>
+  <data name="NullBooleanComparison_ProblemDescription" xml:space="preserve">
+    <value>Invalid null comparison: {0} ({1})</value>
+    <comment> </comment>
+  </data>
+  <data name="NullBooleanComparison_RuleName" xml:space="preserve">
+    <value>Invalid null comparison</value>
   </data>
   <data name="TableWithoutDescription_ProblemDescription" xml:space="preserve">
     <value>Table {0} has no description</value>

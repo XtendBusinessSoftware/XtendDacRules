@@ -125,6 +125,15 @@ namespace Xtend.Dac.Rules
         public const string CursorMissingStatement_ProblemDescription = "CursorMissingStatement_ProblemDescription";
 
         /// <summary>
+        /// Lookup name inside the resources file for the rule name
+        /// </summary>
+        public const string NullBooleanComparison_RuleName = "NullBooleanComparison_RuleName";
+        /// <summary>
+        /// Lookup ID inside the resources file for the description
+        /// </summary>
+        public const string NullBooleanComparison_ProblemDescription = "NullBooleanComparison_ProblemDescription";
+
+        /// <summary>
         /// The design category (should not be localized)
         /// </summary>
         public const string CategoryDesign = "Design";

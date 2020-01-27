@@ -124,7 +124,7 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} of cursor &apos;{1}&apos; in procedure {2}..
+        ///   Looks up a localized string similar to {0} of cursor &apos;{1}&apos; in procedure {2}.
         /// </summary>
         internal static string CursorMissingStatement_ProblemDescription {
             get {
@@ -210,6 +210,24 @@ namespace Xtend.Dac.Rules {
         internal static string NoExplicitXActAbortSet_RuleName {
             get {
                 return ResourceManager.GetString("NoExplicitXActAbortSet_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid null comparison: {0} ({1}).
+        /// </summary>
+        internal static string NullBooleanComparison_ProblemDescription {
+            get {
+                return ResourceManager.GetString("NullBooleanComparison_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid null comparison.
+        /// </summary>
+        internal static string NullBooleanComparison_RuleName {
+            get {
+                return ResourceManager.GetString("NullBooleanComparison_RuleName", resourceCulture);
             }
         }
         
