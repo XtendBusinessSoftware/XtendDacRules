@@ -37,10 +37,14 @@ namespace Xtend.Dac.Rules
             ProcedureCalls = new List<ExecutableProcedureReference>();
             MissingParameters = new Dictionary<ExecutableProcedureReference, string>();
             this.model = model;
+            exceptions = new List<string>();
         }
 
         public override void ExplicitVisit(ExecutableProcedureReference node)
         {
+            if (node.ProcedureReference.ProcedureReference == null)
+                return;
+
             SchemaObjectName schemaObject = node.ProcedureReference.ProcedureReference.Name;
             Identifier id = node.ProcedureReference.ProcedureReference.Name.SchemaIdentifier;
             string schema;
@@ -112,5 +116,7 @@ namespace Xtend.Dac.Rules
                 }
             }
         }
+
+        public List<string> exceptions = null;
     }
 }
