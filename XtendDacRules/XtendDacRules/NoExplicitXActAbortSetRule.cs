@@ -35,7 +35,7 @@ namespace Xtend.Dac.Rules
         Category = RuleConstants.CategoryPerformance,            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                  // This rule targets specific elements rather than the whole model
 
-    public sealed class NoExplicitXActAbortSetRule : SqlCodeAnalysisRule
+    public sealed class NoExplicitXActAbortSetRule : XtendSqlProcedureAnalysisRule
     {
         /// <summary>
         /// This rule= will be grouped by "Xtend.Dac.Rules.Performance", with the rule
@@ -62,34 +62,24 @@ namespace Xtend.Dac.Rules
         /// analyzed.
         /// </param>
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
+        public override IList<SqlRuleProblem> Analyze(XtendSqlRuleExecutionContext context)
         {
             IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlObject modelElement = ruleExecutionContext.ModelElement;
-            string elementName = ruleExecutionContext.SchemaModel.DisplayServices.GetElementName(modelElement, ElementNameStyle.EscapedFullyQualifiedName);
-            TSqlFragment fragment = ruleExecutionContext.ScriptFragment;
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            // Get schema of the procedure.
-            TSqlObject schema = modelElement.GetReferenced(Procedure.Schema).SingleOrDefault();
-
-            if (schema != null && fragment.FragmentLength > 0)
+            // Use a visitor to see if the procedure has a nocount set
+            SetXActAbortVisitor visitor = new SetXActAbortVisitor();
+            context.ScriptFragment.Accept(visitor);
+            if (!visitor.SetXActAbortFound)
             {
-        // Use a visitor to see if the procedure has a nocount set
-                SetXActAbortVisitor visitor = new SetXActAbortVisitor();
-                fragment.Accept(visitor);
-                if (!visitor.SetXActAbortFound)
-                {
-                    SqlRuleProblem problem = new SqlRuleProblem(
-                                                String.Format(
-                                                    CultureInfo.CurrentCulture,
-                                                    ruleDescriptor.DisplayDescription,
-                                                    elementName),
-                                                modelElement);
-                    problems.Add(problem);
-                }
+                SqlRuleProblem problem = new SqlRuleProblem(
+                                            String.Format(
+                                                CultureInfo.CurrentCulture,
+                                                context.RuleDescriptor.DisplayDescription,
+                                                context.ElementName),
+                                            context.ModelElement);
+                problems.Add(problem);
             }
+
             return problems;
         }
     }

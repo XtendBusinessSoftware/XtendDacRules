@@ -35,7 +35,7 @@ namespace Xtend.Dac.Rules
         Category = RuleConstants.CategoryDesign,            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                  // This rule targets specific elements rather than the whole model
 
-    public sealed class MissingMandatoryParameterRule : SqlCodeAnalysisRule
+    public sealed class MissingMandatoryParameterRule : XtendSqlProcedureAnalysisRule
     {
         /// <summary>
         /// This rule= will be grouped by "Xtend.Dac.Rules.Naming", with the rule
@@ -53,7 +53,7 @@ namespace Xtend.Dac.Rules
             };
 
         }
-
+        
         /// <summary>
         /// For element-scoped rules the Analyze method is executed once for every matching object in the model. 
         /// </summary>
@@ -62,36 +62,25 @@ namespace Xtend.Dac.Rules
         /// analyzed.
         /// </param>
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
+        public override IList<SqlRuleProblem> Analyze(XtendSqlRuleExecutionContext context)
         {
             IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlObject modelElement = ruleExecutionContext.ModelElement;
-            string elementName = ruleExecutionContext.SchemaModel.DisplayServices.GetElementName(modelElement, ElementNameStyle.EscapedFullyQualifiedName);
-            TSqlFragment fragment = ruleExecutionContext.ScriptFragment;
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            // Get schema of the procedure.
-            TSqlObject schema = modelElement.GetReferenced(Procedure.Schema).SingleOrDefault();
-
-            if (schema != null)
+            // Use a visitor to see if the procedure has unused variables
+            MandatoryParameterVisitor visitor = new MandatoryParameterVisitor(context.SchemaModel);
+            context.ScriptFragment.Accept(visitor);
+            foreach (ExecutableProcedureReference element in visitor.ProcedureCalls)
             {
-                // Use a visitor to see if the procedure has unused variables
-                MandatoryParameterVisitor visitor = new MandatoryParameterVisitor(ruleExecutionContext.SchemaModel);
-                fragment.Accept(visitor);
-                foreach (ExecutableProcedureReference element in visitor.ProcedureCalls)
-                {
-                    SqlRuleProblem problem = new SqlRuleProblem(
-                                                String.Format(
-                                                    CultureInfo.CurrentCulture,
-                                                    ruleDescriptor.DisplayDescription,
-                                                    element.ProcedureReference.ProcedureReference.Name.SchemaIdentifier.Value,
-                                                    element.ProcedureReference.ProcedureReference.Name.BaseIdentifier.Value,
-                                                    visitor.MissingParameters[element]),
-                                                modelElement,
-                                                element);
-                    problems.Add(problem);
-                }
+                SqlRuleProblem problem = new SqlRuleProblem(
+                                            String.Format(
+                                                CultureInfo.CurrentCulture,
+                                                context.RuleDescriptor.DisplayDescription,
+                                                element.ProcedureReference.ProcedureReference.Name.SchemaIdentifier.Value,
+                                                element.ProcedureReference.ProcedureReference.Name.BaseIdentifier.Value,
+                                                visitor.MissingParameters[element]),
+                                            context.ModelElement,
+                                            element);
+                problems.Add(problem);
             }
 
             return problems;

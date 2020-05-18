@@ -99,6 +99,7 @@
     <Compile Include="Visitors\GetQuerySpecificationsVisitor.cs" />
     <Compile Include="Visitors\GetConstraintsVisitor.cs" />
     <Compile Include="XtendExportCodeAnalysisRuleAttribute.cs" />
+    <Compile Include="XtendSqlProcedureAnalysisRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RuleResources.resx">

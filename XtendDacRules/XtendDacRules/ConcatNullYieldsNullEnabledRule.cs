@@ -35,7 +35,7 @@ namespace Xtend.Dac.Rules
         Category = RuleConstants.CategoryDesign,            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                  // This rule targets specific elements rather than the whole model
 
-    public sealed class ConcatNullYieldsNullEnabledRule : SqlCodeAnalysisRule
+    public sealed class ConcatNullYieldsNullEnabledRule : XtendSqlProcedureAnalysisRule
     {
         /// <summary>
         /// This rule= will be grouped by "Xtend.Dac.Rules.Design", with the rule
@@ -50,41 +50,30 @@ namespace Xtend.Dac.Rules
             {
                 ModelSchema.Procedure
             };
-
         }
 
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
+        public override IList<SqlRuleProblem> Analyze(XtendSqlRuleExecutionContext context)
         {
             IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlObject modelElement = ruleExecutionContext.ModelElement;
-            string elementName = ruleExecutionContext.SchemaModel.DisplayServices.GetElementName(modelElement, ElementNameStyle.EscapedFullyQualifiedName);
-            TSqlFragment fragment = ruleExecutionContext.ScriptFragment;
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            // Get schema of the procedure.
-            TSqlObject schema = modelElement.GetReferenced(Procedure.Schema).SingleOrDefault();
-
-            if (schema != null)
+            // Use a visitor to see if the procedure has a nocount set
+            SetConcatNullYieldsNullVisitor visitor = new SetConcatNullYieldsNullVisitor();
+            context.ScriptFragment.Accept(visitor);
+            if (visitor.SetConcatNullYieldsNullEnabled)
             {
-                // Use a visitor to see if the procedure has a nocount set
-                SetConcatNullYieldsNullVisitor visitor = new SetConcatNullYieldsNullVisitor();
-                fragment.Accept(visitor);
-                if (visitor.SetConcatNullYieldsNullEnabled)
+                foreach (PredicateSetStatement element in visitor.SetCalls)
                 {
-                    foreach (PredicateSetStatement element in visitor.SetCalls)
-                    {
-                        SqlRuleProblem problem = new SqlRuleProblem(
-                                                    String.Format(
-                                                        CultureInfo.CurrentCulture,
-                                                        ruleDescriptor.DisplayDescription,
-                                                        elementName),
-                                                    modelElement,
-                                                    element);
-                        problems.Add(problem);
-                    }
+                    SqlRuleProblem problem = new SqlRuleProblem(
+                                                String.Format(
+                                                    CultureInfo.CurrentCulture,
+                                                    context.RuleDescriptor.DisplayDescription,
+                                                    context.ElementName),
+                                                context.ModelElement,
+                                                element);
+                    problems.Add(problem);
                 }
             }
+
             return problems;
         }
     }
