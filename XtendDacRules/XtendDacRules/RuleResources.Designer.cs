@@ -178,6 +178,24 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Procedure &apos;{0}&apos; queries partitioned table &apos;{1}&apos;, and needs to be constrained on column &apos;{2}&apos;..
+        /// </summary>
+        internal static string MissingPartitioningColumn_ProblemDescription {
+            get {
+                return ResourceManager.GetString("MissingPartitioningColumn_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing partitioning constraint..
+        /// </summary>
+        internal static string MissingPartitioningColumn_RuleName {
+            get {
+                return ResourceManager.GetString("MissingPartitioningColumn_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Procedure {0} does not set nocount.
         /// </summary>
         internal static string NoExplicitNoCountSet_ProblemDescription {

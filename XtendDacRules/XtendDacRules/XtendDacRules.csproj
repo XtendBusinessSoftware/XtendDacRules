@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckPartitioningConstraint.cs" />
     <Compile Include="ColumnWithoutDescriptionRule.cs" />
     <Compile Include="ConcatNullYieldsNullEnabledRule.cs" />
     <Compile Include="CursorMissingStatementRule.cs" />
@@ -94,6 +95,9 @@
     <Compile Include="UnusedParameterRule.cs" />
     <Compile Include="UnusedVariableRule.cs" />
     <Compile Include="UnusedVariableVisitor.cs" />
+    <Compile Include="Visitors\CollectJoinVisitor.cs" />
+    <Compile Include="Visitors\GetQuerySpecificationsVisitor.cs" />
+    <Compile Include="Visitors\GetConstraintsVisitor.cs" />
     <Compile Include="XtendExportCodeAnalysisRuleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
