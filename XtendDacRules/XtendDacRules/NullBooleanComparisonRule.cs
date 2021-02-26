@@ -34,7 +34,7 @@ namespace Xtend.Dac.Rules
         RuleConstants.NullBooleanComparison_ProblemDescription,    // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDesign,            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                  // This rule targets specific elements rather than the whole model
-    public sealed class NullBooleanComparisonRule : SqlCodeAnalysisRule
+    public sealed class NullBooleanComparisonRule : XtendSqlProcedureAnalysisRule
     {
         /// <summary>
         /// This rule= will be grouped by "Xtend.Dac.Rules.Naming", with the rule
@@ -60,41 +60,30 @@ namespace Xtend.Dac.Rules
         /// analyzed.
         /// </param>
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
+        public override IList<SqlRuleProblem> Analyze(XtendSqlRuleExecutionContext context)
         {
             IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlObject modelElement = ruleExecutionContext.ModelElement;
-            string elementName = ruleExecutionContext.SchemaModel.DisplayServices.GetElementName(modelElement, ElementNameStyle.EscapedFullyQualifiedName);
-            TSqlFragment fragment = ruleExecutionContext.ScriptFragment;
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            // Get schema of the procedure.
-            TSqlObject schema = modelElement.GetReferenced(Procedure.Schema).SingleOrDefault();
-
-            if (schema != null && fragment.FragmentLength > 0)
+            NullBooleanComparisonVisitor visitor = new NullBooleanComparisonVisitor();
+            context.ScriptFragment.Accept(visitor);
+            foreach (var element in visitor.InvalidBooleanComparisons)
             {
-                NullBooleanComparisonVisitor visitor = new NullBooleanComparisonVisitor();
-                fragment.Accept(visitor);
-                foreach (var element in visitor.InvalidBooleanComparisons)
-                {
-                    string description = element.ComparisonType == BooleanComparisonType.NotEqualToBrackets || element.ComparisonType == BooleanComparisonType.NotEqualToExclamation
-                         ? "use 'is not null' instead" : element.ComparisonType == BooleanComparisonType.Equals ? "use 'is null' instead" : element.ComparisonType.ToString();
+                string description = element.ComparisonType == BooleanComparisonType.NotEqualToBrackets || element.ComparisonType == BooleanComparisonType.NotEqualToExclamation
+                        ? "use 'is not null' instead" : element.ComparisonType == BooleanComparisonType.Equals ? "use 'is null' instead" : element.ComparisonType.ToString();
 
-                    string statement = string.Join("", element.ScriptTokenStream
-                        .Skip(element.FirstTokenIndex)
-                        .Take(element.LastTokenIndex - element.FirstTokenIndex + 1)
-                        .Select(x => x.Text).ToArray());
+                string statement = string.Join("", element.ScriptTokenStream
+                    .Skip(element.FirstTokenIndex)
+                    .Take(element.LastTokenIndex - element.FirstTokenIndex + 1)
+                    .Select(x => x.Text).ToArray());
 
-                    SqlRuleProblem problem = new SqlRuleProblem(
-                                                String.Format(
-                                                    CultureInfo.CurrentCulture,
-                                                    ruleDescriptor.DisplayDescription,
-                                                    statement, description),
-                                                modelElement,
-                                                element.SecondExpression);
-                    problems.Add(problem);
-                }
+                SqlRuleProblem problem = new SqlRuleProblem(
+                                            String.Format(
+                                                CultureInfo.CurrentCulture,
+                                                context.RuleDescriptor.DisplayDescription,
+                                                statement, description),
+                                            context.ModelElement,
+                                            element.SecondExpression);
+                problems.Add(problem);
             }
             return problems;
         }

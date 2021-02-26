@@ -35,7 +35,7 @@ namespace Xtend.Dac.Rules
         Category = RuleConstants.CategoryDesign,            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                  // This rule targets specific elements rather than the whole model
 
-    public sealed class UnusedParameterRule : SqlCodeAnalysisRule
+    public sealed class UnusedParameterRule : XtendSqlProcedureAnalysisRule
     {
         /// <summary>
         /// This rule= will be grouped by "Xtend.Dac.Rules.Naming", with the rule
@@ -62,36 +62,26 @@ namespace Xtend.Dac.Rules
         /// analyzed.
         /// </param>
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
+        public override IList<SqlRuleProblem> Analyze(XtendSqlRuleExecutionContext context)
         {
             IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
-
-            TSqlObject modelElement = ruleExecutionContext.ModelElement;
-            string elementName = ruleExecutionContext.SchemaModel.DisplayServices.GetElementName(modelElement, ElementNameStyle.EscapedFullyQualifiedName);
-            TSqlFragment fragment = ruleExecutionContext.ScriptFragment;
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            // Get schema of the procedure.
-            TSqlObject schema = modelElement.GetReferenced(Procedure.Schema).SingleOrDefault();
-
-            if (schema != null)
+            
+            // Use a visitor to see if the procedure has unused variables
+            UnusedVariableVisitor visitor = new UnusedVariableVisitor(true);
+            context.ScriptFragment.Accept(visitor);
+            foreach (DeclareVariableElement element in visitor.DeclareVariableElements.Values)
             {
-                // Use a visitor to see if the procedure has unused variables
-                UnusedVariableVisitor visitor = new UnusedVariableVisitor(true);
-                fragment.Accept(visitor);
-                foreach (DeclareVariableElement element in visitor.DeclareVariableElements.Values)
-                {
-                    SqlRuleProblem problem = new SqlRuleProblem(
-                                                String.Format(
-                                                    CultureInfo.CurrentCulture,
-                                                    ruleDescriptor.DisplayDescription,
-                                                    element.VariableName.Value,
-                                                    elementName),
-                                                modelElement,
-                                                element);
-                    problems.Add(problem);
-                }
+                SqlRuleProblem problem = new SqlRuleProblem(
+                                            String.Format(
+                                                CultureInfo.CurrentCulture,
+                                                context.RuleDescriptor.DisplayDescription,
+                                                element.VariableName.Value,
+                                                context.ElementName),
+                                            context.ModelElement,
+                                            element);
+                problems.Add(problem);
             }
+
             return problems;
         }
     }

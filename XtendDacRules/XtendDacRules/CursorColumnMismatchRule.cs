@@ -34,7 +34,7 @@ namespace Xtend.Dac.Rules
         RuleConstants.CursorColumnMismatch_ProblemDescription,    // ID used to look up the description inside the resources file
         Category = RuleConstants.CategoryDesign,            // Rule category (e.g. "Design", "Naming")
         RuleScope = SqlRuleScope.Element)]                  // This rule targets specific elements rather than the whole model
-    public sealed class CursorColumnMismatchRule : SqlCodeAnalysisRule
+    public sealed class CursorColumnMismatchRule : XtendSqlProcedureAnalysisRule
     {
         /// <summary>
         /// This rule= will be grouped by "Xtend.Dac.Rules.Naming", with the rule
@@ -60,38 +60,28 @@ namespace Xtend.Dac.Rules
         /// analyzed.
         /// </param>
         /// <returns>A list of problems should be returned. These will be displayed in the Visual Studio error list</returns>
-        public override IList<SqlRuleProblem> Analyze(SqlRuleExecutionContext ruleExecutionContext)
+        public override IList<SqlRuleProblem> Analyze(XtendSqlRuleExecutionContext context)
         {
             IList<SqlRuleProblem> problems = new List<SqlRuleProblem>();
 
-            TSqlObject modelElement = ruleExecutionContext.ModelElement;
-            string elementName = ruleExecutionContext.SchemaModel.DisplayServices.GetElementName(modelElement, ElementNameStyle.EscapedFullyQualifiedName);
-            TSqlFragment fragment = ruleExecutionContext.ScriptFragment;
-            RuleDescriptor ruleDescriptor = ruleExecutionContext.RuleDescriptor;
-
-            // Get schema of the procedure.
-            TSqlObject schema = modelElement.GetReferenced(Procedure.Schema).SingleOrDefault();
-
-            if (schema != null && fragment.FragmentLength > 0)
+            CursorVisitor visitor = new CursorVisitor(false, true);
+            context.ScriptFragment.Accept(visitor);
+            foreach (var element in visitor.IncorrectFetchCursorStatements)
             {
-                CursorVisitor visitor = new CursorVisitor(false, true);
-                fragment.Accept(visitor);
-                foreach (var element in visitor.IncorrectFetchCursorStatements)
-                {
-                    var fetch = element.Key;
-                    int fetchCount = fetch.IntoVariables.Count;
-                    string cursorName = element.Value;
-                    SqlRuleProblem problem = new SqlRuleProblem(
-                                                String.Format(
-                                                    CultureInfo.CurrentCulture,
-                                                    ruleDescriptor.DisplayDescription,
-                                                    cursorName,
-                                                    fetchCount),
-                                                modelElement,
-                                                fetch);
-                    problems.Add(problem);
-                }
+                var fetch = element.Key;
+                int fetchCount = fetch.IntoVariables.Count;
+                string cursorName = element.Value;
+                SqlRuleProblem problem = new SqlRuleProblem(
+                                            String.Format(
+                                                CultureInfo.CurrentCulture,
+                                                context.RuleDescriptor.DisplayDescription,
+                                                cursorName,
+                                                fetchCount),
+                                            context.ModelElement,
+                                            fetch);
+                problems.Add(problem);
             }
+
             return problems;
         }
     }

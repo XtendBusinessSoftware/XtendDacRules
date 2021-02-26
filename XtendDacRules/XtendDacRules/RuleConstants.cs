@@ -127,6 +127,15 @@ namespace Xtend.Dac.Rules
         /// <summary>
         /// Lookup name inside the resources file for the rule name
         /// </summary>
+        public const string MissingPartitioningColumn_RuleName = "MissingPartitioningColumn_RuleName";
+        /// <summary>
+        /// Lookup ID inside the resources file for the description
+        /// </summary>
+        public const string MissingPartitioningColumn_ProblemDescription = "MissingPartitioningColumn_ProblemDescription";
+
+        /// <summary>
+        /// Lookup name inside the resources file for the rule name
+        /// </summary>
         public const string NullBooleanComparison_RuleName = "NullBooleanComparison_RuleName";
         /// <summary>
         /// Lookup ID inside the resources file for the description
