@@ -61,7 +61,7 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t create ResourceManager for {0} from {1}..
+        ///   Looks up a localized string similar to Can&apos;t create ResourceManager for {0} from {1}.
         /// </summary>
         internal static string CannotCreateResourceManager {
             get {
@@ -106,7 +106,7 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Column count of fetch ({1}) does not match cursor &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Column count of fetch ({1}) does not match cursor &apos;{0}&apos;.
         /// </summary>
         internal static string CursorColumnMismatch_ProblemDescription {
             get {
