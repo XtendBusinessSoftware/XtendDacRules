@@ -194,9 +194,9 @@
     <value>No unused variables may exist</value>
   </data>
   <data name="MissingPartitioningColumn_ProblemDescription" xml:space="preserve">
-    <value>Procedure '{0}' queries partitioned table '{1}', and needs to be constrained on column '{2}'.</value>
+    <value>Procedure '{0}' queries partitioned table '{1}', and needs to be constrained on column '{2}'</value>
   </data>
   <data name="MissingPartitioningColumn_RuleName" xml:space="preserve">
-    <value>Missing partitioning constraint.</value>
+    <value>Missing partitioning constraint</value>
   </data>
 </root>

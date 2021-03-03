@@ -19,7 +19,7 @@ namespace Xtend.Dac.Rules {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class RuleResources {
@@ -178,7 +178,7 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Procedure &apos;{0}&apos; queries partitioned table &apos;{1}&apos;, and needs to be constrained on column &apos;{2}&apos;..
+        ///   Looks up a localized string similar to Procedure &apos;{0}&apos; queries partitioned table &apos;{1}&apos;, and needs to be constrained on column &apos;{2}&apos;.
         /// </summary>
         internal static string MissingPartitioningColumn_ProblemDescription {
             get {
@@ -187,7 +187,7 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing partitioning constraint..
+        ///   Looks up a localized string similar to Missing partitioning constraint.
         /// </summary>
         internal static string MissingPartitioningColumn_RuleName {
             get {
