@@ -14,6 +14,7 @@ The extra rules are:
 * XR0010: Column count mismatch of fetch and cursor
 * XR0011: Missing or invalid deallocate or open of cursor
 * XR0012: Invalid null comparison
+* XR0013: Missing partitioning constraint
 
 The wiki contains a quick guide how to install the rules and a short description of the included rules.
 
