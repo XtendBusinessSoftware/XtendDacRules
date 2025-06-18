@@ -99,7 +99,7 @@ namespace Xtend.Dac.Rules
             this.RuleDescriptor = ruleExecutionContext.RuleDescriptor;
 
             this.ElementName = ruleExecutionContext.SchemaModel.DisplayServices.GetElementName(ModelElement, ElementNameStyle.EscapedFullyQualifiedName);
-            this.Schema = ModelElement.GetReferenced(Procedure.Schema).SingleOrDefault(); // schema of the procedure
+            this.Schema = ModelElement.GetReferenced(Procedure.Schema, DacQueryScopes.All).SingleOrDefault(); // schema of the procedure
         }
 
         /// <summary>
