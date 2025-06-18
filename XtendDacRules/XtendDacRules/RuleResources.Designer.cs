@@ -268,6 +268,42 @@ namespace Xtend.Dac.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter {0} is assigned but its value is never used in procedure {1}.
+        /// </summary>
+        internal static string UnusedAssignedParameter_ProblemDescription {
+            get {
+                return ResourceManager.GetString("UnusedAssignedParameter_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter is assigned but its value is never used.
+        /// </summary>
+        internal static string UnusedAssignedParameter_RuleName {
+            get {
+                return ResourceManager.GetString("UnusedAssignedParameter_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variable {0} is assigned but its value is never used in procedure {1}.
+        /// </summary>
+        internal static string UnusedAssignedVariable_ProblemDescription {
+            get {
+                return ResourceManager.GetString("UnusedAssignedVariable_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variable is assigned but its value is never used.
+        /// </summary>
+        internal static string UnusedAssignedVariable_RuleName {
+            get {
+                return ResourceManager.GetString("UnusedAssignedVariable_RuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter {0} is unused in procedure {1}.
         /// </summary>
         internal static string UnusedParameter_ProblemDescription {

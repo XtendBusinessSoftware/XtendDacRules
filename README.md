@@ -15,6 +15,8 @@ The extra rules are:
 * XR0011: Missing or invalid deallocate or open of cursor
 * XR0012: Invalid null comparison
 * XR0013: Missing partitioning constraint
+* XR0014: Variable is assigned but its value is never used
+* XR0015: Parameter is assigned but its value is never used
 
 The wiki contains a quick guide how to install the rules and a short description of the included rules.
 

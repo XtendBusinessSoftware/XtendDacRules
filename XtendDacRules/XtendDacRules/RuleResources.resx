@@ -199,4 +199,16 @@
   <data name="MissingPartitioningColumn_RuleName" xml:space="preserve">
     <value>Missing partitioning constraint</value>
   </data>
+  <data name="UnusedAssignedVariable_ProblemDescription" xml:space="preserve">
+    <value>Variable {0} is assigned but its value is never used in procedure {1}</value>
+  </data>
+  <data name="UnusedAssignedVariable_RuleName" xml:space="preserve">
+    <value>Variable is assigned but its value is never used</value>
+  </data>
+  <data name="UnusedAssignedParameter_ProblemDescription" xml:space="preserve">
+    <value>Parameter {0} is assigned but its value is never used in procedure {1}</value>
+  </data>
+  <data name="UnusedAssignedParameter_RuleName" xml:space="preserve">
+    <value>Parameter is assigned but its value is never used</value>
+  </data>
 </root>

@@ -92,7 +92,9 @@
     <Compile Include="SetNoCountVisitor.cs" />
     <Compile Include="SetXActAbortVisitor.cs" />
     <Compile Include="TableWithoutDescriptionRule.cs" />
+    <Compile Include="UnusedAssignedParameterRule.cs" />
     <Compile Include="UnusedParameterRule.cs" />
+    <Compile Include="UnusedAssignedVariableRule.cs" />
     <Compile Include="UnusedVariableRule.cs" />
     <Compile Include="UnusedVariableVisitor.cs" />
     <Compile Include="Visitors\CollectJoinVisitor.cs" />

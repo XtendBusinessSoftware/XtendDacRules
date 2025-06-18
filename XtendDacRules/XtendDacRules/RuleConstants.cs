@@ -69,7 +69,6 @@ namespace Xtend.Dac.Rules
         /// </summary>
         public const string NoExplicitXActAbortSet_ProblemDescription = "NoExplicitXActAbortSet_ProblemDescription";
 
-
         /// <summary>
         /// Lookup name inside the resources file for the rule name
         /// </summary>
@@ -78,6 +77,24 @@ namespace Xtend.Dac.Rules
         /// Lookup ID inside the resources file for the description
         /// </summary>
         public const string UnusedVariable_ProblemDescription = "UnusedVariable_ProblemDescription";
+
+        /// <summary>
+        /// Lookup name inside the resources file for the rule name
+        /// </summary>
+        public const string UnusedAssignedVariable_RuleName = "UnusedAssignedVariable_RuleName";
+        /// <summary>
+        /// Lookup ID inside the resources file for the description
+        /// </summary>
+        public const string UnusedAssignedVariable_ProblemDescription = "UnusedAssignedVariable_ProblemDescription";
+
+        /// <summary>
+        /// Lookup name inside the resources file for the rule name
+        /// </summary>
+        public const string UnusedAssignedParameter_RuleName = "UnusedAssignedParameter_RuleName";
+        /// <summary>
+        /// Lookup ID inside the resources file for the description
+        /// </summary>
+        public const string UnusedAssignedParameter_ProblemDescription = "UnusedAssignedParameter_ProblemDescription";
 
         /// <summary>
         /// Lookup name inside the resources file for the rule name
